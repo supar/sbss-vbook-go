@@ -49,7 +49,7 @@ TEL;TYPE=work:+123 00 1200000
 TEL;TYPE=home:+123 00 1230000`
 	)
 
-	if d := marshal(vc); string(d) != mock {
+	if d := Encode(vc); string(d) != mock {
 		t.Error("Unexpected result")
 		t.Logf("%s", d)
 		t.Log(mock)
@@ -71,7 +71,7 @@ func Test_CardsDataArray_CheckNilOptions(t *testing.T) {
 FN:Noname C`
 	)
 
-	if d := marshal(vc); string(d) != mock {
+	if d := Encode(vc); string(d) != mock {
 		t.Error("Unexpected result")
 		t.Logf("%s", d)
 		t.Log(mock)
@@ -110,7 +110,7 @@ END:VCARD
 AGENT:BEGIN:VCARD\nFN:Some coworker C\nEND:VCARD\n`
 	)
 
-	if d := marshal(vc); string(d) != mock {
+	if d := Encode(vc); string(d) != mock {
 		t.Error("Unexpected result")
 		t.Logf("%s", d)
 		t.Log(mock)

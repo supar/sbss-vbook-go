@@ -50,7 +50,7 @@ type fieldStruct struct {
 	wrapvcard bool
 }
 
-func marshal(v interface{}) []byte {
+func Encode(v interface{}) []byte {
 	return element(reflect.ValueOf(v), nil)
 }
 
