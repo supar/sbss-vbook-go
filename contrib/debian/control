@@ -1,0 +1,10 @@
+Source: sbss-vbook
+Priority: extra
+Section: misc
+Build-Depends: debhelper (>= 9)
+Standards-Version: @VERSION@
+Maintainer: Paul Rezunenko <ezunenko@lanbilling.ru>
+
+Package: sbss-vbook
+Architecture: amd64
+Description: LANBILLING SBSS carddav server

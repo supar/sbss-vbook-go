@@ -1,0 +1,39 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+# export DH_VERBOSE := 1
+
+# Export variables
+export PATH := /usr/local/go/bin:/go/bin:$(PATH)
+export GOPATH := /go:$(CURDIR)
+export PROJECT := sbss-vbook
+export DESTDIR := debian/$(PROJECT)
+
+override_dh_auto_clean:
+	rm -rf `ls -A | grep -v "debian"`
+	tar xf ../*.orig.tar.gz -C ..
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	cd src/$(PROJECT) && $(MAKE) build
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	install -g 0 -o 0 -d $(DESTDIR)/etc/sbss/$(PROJECT)/
+	install -g 0 -o 0 -d $(DESTDIR)/usr/sbin/
+	install -g 0 -o 0 -d $(DESTDIR)/lib/systemd/system/
+	install -m755 src/$(PROJECT)/$(PROJECT) $(DESTDIR)/usr/sbin/
+	install -m644 debian/sbss-vbook.cfg $(DESTDIR)/etc/sbss/$(PROJECT)/$(PROJECT).cfg
+	install -m644 debian/$(PROJECT).service $(DESTDIR)/lib/systemd/system/
+
+# the SHA1 of dockerinit is important: don't strip it
+# also, Go has lots of problems with stripping, so just don't
+override_dh_strip:
+
+
+%:
+	dh $@
+

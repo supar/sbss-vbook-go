@@ -1,0 +1,13 @@
+[Unit]
+Description=LANBilling SBSS carddav server
+Requires=network.target
+After=multi-user.target
+
+[Service]
+EnvironmentFile=/etc/sbss/sbss-vbook/sbss-vbook.cfg
+ExecStart=/bin/bash -c "/usr/sbin/sbss-vbook -L ${CARDDAVSERVER} -A ${SBSSAPISERVER} -v 0" sbss-vbook
+User=sbss-vbook
+
+[Install]
+WantedBy=multi-user.target
+

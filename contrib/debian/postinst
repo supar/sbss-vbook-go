@@ -1,0 +1,10 @@
+#!/bin/sh
+# postinst script for lbweb-admin
+#
+# see: dh_installdeb(1)
+set -e
+
+if ! id -u sbss-vbook >/dev/null 2>&1; then 
+    useradd sbss-vbook -r
+fi
+
