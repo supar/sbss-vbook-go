@@ -50,8 +50,17 @@ type fieldStruct struct {
 	wrapvcard bool
 }
 
+type vcardWrap struct {
+	Item interface{} `vcard:",omitname,wrapvcard,version(3.0)"`
+}
+
 func Encode(v interface{}) []byte {
 	return element(reflect.ValueOf(v), nil)
+}
+
+func EncodeWrap(v interface{}) []byte {
+	w := vcardWrap{v}
+	return Encode(w)
 }
 
 func element(v reflect.Value, opts *fieldStruct) (data []byte) {
